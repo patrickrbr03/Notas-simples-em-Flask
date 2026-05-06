@@ -1,2 +1,2 @@
 # Notas-simples-em-Flask
-Projeto simples de crud de notas simples feito em Flask
+Projeto de crud de notas simples, sem persistência, feito em Flask
