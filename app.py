@@ -5,9 +5,8 @@ app = Flask(__name__)
 tarefas = []
 contador = 1
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def busca(id):
+    return next((t for t in tarefas if t['id'] == id), None)
 
 @app.route("/tarefas", methods=['POST'])
 def criar_tarefa():
@@ -31,7 +30,7 @@ def listar_tarefas():
 
 @app.route('/tarefas/<int:id>', methods=['GET'])
 def buscar_tarefa(id):
-    tarefa = next((t for t in tarefas if t['id'] == id), None)
+    tarefa = busca(id)
     if tarefa is None:
         return jsonify({"erro": "Tarefa não encontrada"}), 404
 
@@ -39,7 +38,7 @@ def buscar_tarefa(id):
 
 @app.route('/tarefas/<int:id>', methods=['PUT'])
 def atualizar_tarefa(id):
-    tarefa = next((t for t in tarefas if t['id'] == id), None)
+    tarefa = busca(id)
     if tarefa is None:
         return jsonify({"erro":"Tarefa não encontrada"}), 404
 
@@ -53,7 +52,7 @@ def atualizar_tarefa(id):
 @app.route('/tarefas/<int:id>', methods=['DELETE'])
 def deletar_tarefa(id):
     global tarefas
-    tarefa = next((t for t in tarefas if t['id'] == id), None)
+    tarefa = busca(id)
     if tarefa is None:
         return jsonify({"erro": "Tarefa não encontrada"}), 404
 
