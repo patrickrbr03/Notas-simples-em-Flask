@@ -5,6 +5,7 @@ app = Flask(__name__)
 tarefas = []
 contador = 1
 
+
 def busca(tarefas, id):
     return next((t for t in tarefas if t['id'] == id), None)
 
